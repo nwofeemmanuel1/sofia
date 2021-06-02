@@ -1,0 +1,34 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 699px) {
+  .main > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  .main img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (min-width: 700px) {
+  .main > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 40%;
+    text-align: center;
+  }
+  .main img {
+    width: 100%;
+    height: auto;
+  }
+}

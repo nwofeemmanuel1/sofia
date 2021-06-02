@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create listing</title>
+    <style>
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+@media (max-width: 499px) {
+  .main > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    color: black;
+  }
+
+  .main img {
+    width: 100%;
+    height: auto;
+  }
+  h1 {
+    font-size: 30px;
+    color: black;
+  }
+     form button{
+   border-radius: 50px;
+   color: black;
+   padding: 10px;
+   width: 200px;
+ 
+  }
+  .main input{
+      border: 1px solid gray;
+      border-radius: 50px;
+      padding: 12px;
+      width: 80%;
+      margin: 7px;
+  }
+
+
+
+}
+@media (min-width: 500px) {
+  .main > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 40%;
+    text-align: center;
+    color: black;
+  }
+  .main img {
+    width: 100%;
+    height: auto;
+  }
+   h1 {
+    font-size: 30px;
+    color: black;
+  }
+    form button{
+   border-radius: 50px;
+   color: black;
+   padding: 20px;
+   width: 200px;
+ 
+  }
+ .main input{
+      border: 1px solid gray;
+      border-radius: 50px;
+      padding: 20px;
+      width: 80%;
+      margin: 7px;
+  }
+
+}
+
+
+    </style>
+</head>
+<body>
+<form>
+    <div class="main">
+
+    <div>
+     <p style="color: green; font-size: 20px; padding: 12px;" id="success"></p>
+        <p>please write the product name choose image to upload bellow</p>
+        <p id="error" style="color: red;"></p>
+      <input type="text" name="name" id="name" placeholder="heading" required>
+      <input type="text" name="link" id="url" placeholder="affiliate link" required>
+    <input type="file" name="file" id="file"   required >
+    <button type="submit">Submit</button>
+    </div>
+  
+    <a href="/shopping.html">Go back to shopping</a>
+</form>
+
+
+<script>
+const uploadtoserver=async(image,url,name)=>{
+try{
+  const formdata = new FormData
+  formdata.append("photo", image[0],)
+    formdata.append("url", url)
+  formdata.append("name", name)
+  const response = await fetch("http://localhost:8080/api/listing", {
+    method: "POST",
+    body: formdata
+  })
+  const result = await response.json()
+  if (result.error==true) {
+    alert("could not upload image to server")
+    console.log(result)
+  } else {
+    document.querySelector("#success").innerHTML = "Image successfully uploaded"
+  document.querySelector("#name").value=""
+  document.querySelector("#url").value=""
+ document.querySelector("#file").files=""
+    document.querySelector("#error").innerHTML = ""
+    setTimeout(()=>window.location.href="/",1000)
+  }
+}catch(error){
+  // alert("Network error please make sure you have an internet connection")
+  console.log(error.message)
+}
+
+}
+
+  document.addEventListener("DOMContentLoaded",()=>{
+    document.querySelector("button").onclick=()=>{
+      event.preventDefault()
+   const name=   document.querySelector("#name").value
+  const files= document.querySelector("#file").files
+  const url=document.querySelector("#url").value
+if(!name)return document.querySelector("#error").innerHTML="name is required"
+if(name.length <3) return document.querySelector("#error").innerHTML = "name must be greater than 3 characters"
+   if (!url) return document.querySelector("#error").innerHTML = "affiliate link is required"
+if(!files[0])return  document.querySelector("#error").innerHTML = "please add the image u want to upload"
+    uploadtoserver(files,url,name)
+   } })
+</script>
+
+
+</body>
+
+
+</html>

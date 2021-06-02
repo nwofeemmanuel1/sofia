@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate marketing</title>
+    <link rel="stylesheet" href="css/shopping.css">
+    <link rel="stylesheet" href="css/shoppingmain.css">
+    <script>
+        appendNewListing = (name,imagesource,url) => {
+            const div = document.createElement("div")
+            const h1 = document.createElement("h1")
+            const img = document.createElement("img")
+            const button = document.createElement("button")
+            h1.innerHTML = name
+            img.src = imagesource
+            button.innerHTML = "Buy product"
+            button.addEventListener("click", () => window.location.href=`${url}`)
+            div.append(h1, img, button)
+            document.querySelector(".main").appendChild(div)
+        }
+    
+
+
+        const fetchlistings=async()=>{
+            try{
+                const response = await fetch("/api/viewlistings")
+                const result = await response.json()
+                if(result.error ===true){
+
+                }else{
+                    console.log(result.listings)
+                    result.listings.forEach(result=> appendNewListing(result.name,result.imagesource,result.url))
+                }
+                }catch(err){
+                document.querySelector("body").innerHTML="<h1>Network Error Nothing was returned from server</h1>"
+            }
+            
+        }
+        fetchlistings()
+
+        function redirect(){
+            window.location.href="blog.html"
+        }
+       
+    </script>
+    
+</head>
+<body>
+<nav>
+    <div class="logo">
+        <img src="https://wpmanageninja.com/wp-content/uploads/2019/01/amazon-affiliate-marketing-for-dummies-1200-628.png"
+            alt="Logo Image">
+    </div>
+    <div class="hamburger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+    <ul class="nav-links">
+        <!-- <li><a href="#">Home</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Services</a></li> -->
+        <li><a href="index.html">Home</a></li>
+        <li><button class="login-button" onclick="redirect()">Blog Post</button></li>
+        <li><button class="join-button" onclick=' alert("please call this phone number:  08060304393")'>Contact</button></li>
+    </ul>
+</nav>
+<script src="nav.js"></script>
+
+<main>
+ 
+<div class="main">
+
+<!-- 
+    <div>
+        <h1>Phone for Sale</h1>
+        <img src="data:image/jpeg;base64,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" alt="communiy">
+       
+        <p><button>buy product</button></p>
+
+    </div>
+
+
+
+  
+
+
+
+    <div>
+
+        <h1> Senator wear for sale</h1>
+        <img src="https://d3re0f381bckq9.cloudfront.net/46409104_screenshot-20200115-122523_720x1423.webp" alt="assistant">
+                                <p><button onclick="window.location.href='https://jiji.ng/surulere/clothing/lovely-kaftans-aoTcUukWpf9JSJ1GPaF81SWD.html?lid=RTj98XC9FsrcuZZa&cur_pos=2&pos=2&ads_count=55172&ads_per_page=20&page=1' ">buy product</button></p>
+
+    </div> -->
+
+
+</div>
+
+ 
+</main>
+
+
+<script>
+  
+        // document.querySelector("#generate").onclick=()=>{
+            // appendNewListing=()=>{
+            //     const div = document.createElement("div")
+            //     const h1 = document.createElement("h1")
+            //     const img = document.createElement("img")
+            //     const button = document.createElement("button")
+            //     h1.innerHTML = "buy for us"
+            //     img.src = "https://d3re0f381bckq9.cloudfront.net/46409104_screenshot-20200115-122523_720x1423.webp"
+            //     button.innerHTML = "Buy product"
+            //     button.addEventListener("click", () => alert('clicked'))
+            //     div.append(h1, img, button)
+            //     document.querySelector(".main").appendChild(div)
+            // }
+       
+        // }
+    // })
+// document.querySelector("#generate").o
+</script>
+
+<button style="color: black;" id="generate">press me </button>
+</body>
+</html>

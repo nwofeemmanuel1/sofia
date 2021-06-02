@@ -1,0 +1,56 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+@media (max-width: 499px) {
+  .main > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    color: black;
+  }
+
+  .main img {
+    width: 100%;
+    height: auto;
+  }
+  h1 {
+    font-size: 30px;
+    color: black;
+  }
+  .main button {
+    border-radius: 50px;
+    color: black;
+    padding: 11px;
+  }
+}
+@media (min-width: 500px) {
+  .main > div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 25%;
+    text-align: center;
+    color: black;
+  }
+  .main img {
+    width: 100%;
+    height: auto;
+  }
+  h1 {
+    font-size: 30px;
+    color: black;
+  }
+  .main button {
+    border-radius: 50px;
+    color: black;
+    padding: 11px;
+  }
+}
